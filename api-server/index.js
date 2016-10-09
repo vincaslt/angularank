@@ -56,21 +56,28 @@ function populateRepoWithContributors(repository) {
   return axios.get(API_URL + '/repos/angular/' + repository.name + '/stats/contributors')
     .then(function(response) {
       var contributors = response.data;
-      var contributions = contributors.map(function(contribution) {
+      var contributions = contributors ? contributors.map(function(contribution) {
         return {
           total: contribution.total,
           author: contribution.author.id
         };
-      })
+      }) : null
       return {
         id: repository.id,
-        contributions: contributions
+        contributions: contributions || []
       };
     })
     .catch(function(error) {
       console.log(error);
     });
 }
+
+// Enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/repos', cache('3 hours'), function (req, res) {
   getOrganization().then(function(response) {
