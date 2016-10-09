@@ -15,9 +15,6 @@ const RECEIVE_REPOSITORIES = 'RECEIVE_REPOSITORIES'
 const REQUEST_PEOPLE = 'REQUEST_PEOPLE'
 const RECEIVE_PEOPLE = 'RECEIVE_PEOPLE'
 
-const REQUEST_CONTRIBUTIONS_MAPPING = 'REQUEST_CONTRIBUTIONS_MAPPING'
-const RECEIVE_CONTRIBUTIONS_MAPPING = 'RECEIVE_CONTRIBUTIONS_MAPPING'
-
 // Action creators
 const genericRequest = (type) => ({
   type,
@@ -36,12 +33,6 @@ const receivePeople = (people) => ({
   people
 })
 
-const receiveContributionsMapping = (contributions) => ({
-  type: RECEIVE_CONTRIBUTIONS_MAPPING,
-  [pendingTask]: end,
-  contributions
-})
-
 // Thunks
 export const fetchRepositories = () => dispatch => {
   dispatch(genericRequest(REQUEST_REPOSITORIES))
@@ -51,14 +42,8 @@ export const fetchRepositories = () => dispatch => {
 
 export const fetchPeople = () => dispatch => {
   dispatch(genericRequest(REQUEST_PEOPLE))
-  return gh.getOrganization('angular').listMembers()
-    .then((members) => dispatch(receivePeople(members.data)))
-}
-
-export const fetchContributionsMapping = () => dispatch => {
-  dispatch(genericRequest(REQUEST_CONTRIBUTIONS_MAPPING))
-  return axios.get(AR_API_URL + '/repos')
-    .then((contributions) => dispatch(receiveContributionsMapping(contributions.data)))
+  return axios.get(AR_API_URL + '/contributors')
+    .then((people) => dispatch(receivePeople(people.data)))
 }
 
 // Action handlers
@@ -70,10 +55,6 @@ const ACTION_HANDLERS = {
   [RECEIVE_PEOPLE]: (state, { people }) => ({
     ...state,
     people: flatten(people)
-  }),
-  [RECEIVE_CONTRIBUTIONS_MAPPING]: (state, { contributions }) => ({
-    ...state,
-    contributions: flatten(contributions)
   })
 }
 

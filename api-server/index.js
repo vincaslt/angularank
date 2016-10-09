@@ -12,9 +12,44 @@ var API_TOKEN = 'token f6e4d10c1141bbc2082b73173900ac8f27aa04e3';
 
 axios.defaults.headers.common['Authorization'] = API_TOKEN;
 
-function getOrganization() {
+function getPeople() {
+  function getPeopleInPage(page) {
+    return axios.get(API_URL + '/orgs/angular/members', { params: { page: page } })
+      .then(function(members) {
+        var promises = members.data.map(function(member) {
+          return axios.get(API_URL + '/users/' + member.login)
+            .then(function(users) {
+              return users.data;
+            })
+        });
+
+        return Promise.all(promises);
+      })
+      .then(function(peopleInPage) {
+        if (peopleInPage.length >= 30) {
+          return getPeopleInPage(page + 1)
+            .then(function(people) {
+              return peopleInPage.concat(people);
+            });
+        }
+        return peopleInPage;
+      })
+  }
+
   var startTime = Date.now();
-  console.log('Started processing...');
+  console.log('Started processing users...');
+  return getPeopleInPage(1)
+    .then(function(people) {
+      var result = people.filter(Boolean);
+      var ellapsed = (Date.now() - startTime) / 1000;
+      console.log('Processed ' + result.length + ' users in ' + ellapsed + ' seconds');
+      return result;
+    });
+}
+
+function getContributorMappings() {
+  var startTime = Date.now();
+  console.log('Started processing repos...');
   return axios.get(API_URL + '/orgs/angular')
     .then(function(response) {
       var reposCount = response.data.public_repos;
@@ -33,15 +68,15 @@ function getOrganization() {
     })
     .then(function(repos) {
       var ellapsed = (Date.now() - startTime) / 1000;
-      console.log('Processed ' + repos.length + ' records in ' + ellapsed + ' seconds');
+      console.log('Processed ' + repos.length + ' repos in ' + ellapsed + ' seconds');
       return repos;
     });
 }
 
 function getRepositories(page) {
   return axios.get(API_URL + '/orgs/angular/repos', { params: { page: page } })
-    .then(function(response) {
-      var promises = response.data.map(function(repo) {
+    .then(function(repositories) {
+      var promises = repositories.data.map(function(repo) {
         return populateRepoWithContributors(repo);
       });
 
@@ -72,6 +107,8 @@ function populateRepoWithContributors(repository) {
     });
 }
 
+
+
 // Enable CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -79,10 +116,47 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/repos', cache('3 hours'), function (req, res) {
-  getOrganization().then(function(response) {
+app.get('/repos', cache('12 hours'), function (req, res) {
+  getContributorMappings().then(function(response) {
     res.json(response);
   })
+});
+
+app.get('/people', cache('12 hours'), function (req, res) {
+  getPeople().then(function(response) {
+    res.json(response);
+  })
+});
+
+app.get('/contributors', cache('12 hours'), function (req, res) {
+  var promises = [getContributorMappings(), getPeople()];
+  Promise.all(promises)
+    .then(function(response) {
+      var contributorMappings = response[0];
+      var people = response[1];
+      return people.map(function(user) {
+        user.contributions = contributorMappings.reduce(function(contributions, repo) {
+          var contributionsByUser = repo.contributions.find(function(contrib) {
+            return contrib.author === user.id;
+          })
+          if (contributionsByUser) {
+            contributions.push({
+              repositoryId: repo.id,
+              contributions: contributionsByUser.total
+            });
+          }
+
+          return contributions
+        }, []);
+
+        return user;
+      });
+    }).then(function(response) {
+      res.json(response);
+    }).catch(function(error) {
+      console.log(error);
+      res.json([]);
+    });
 });
 
 app.listen(8080, function () {
