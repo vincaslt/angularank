@@ -9,8 +9,17 @@ export const getUserDetails = (state, props) => (
 export const getUserAngularRepositories = createSelector(
   [ getRepositories, getUserDetails ],
   (repositories, user) => {
-    return repositories.filter(repo => (
-      !!user.contributions.find(contribution => contribution.repositoryId === repo.id)
-    ))
+    const angularRepos = []
+    repositories.forEach(repo => {
+      const angularRepo = user.contributions.find(contribution => contribution.repositoryId === repo.id)
+      if (angularRepo && angularRepo.contributions > 0) {
+        angularRepos.push({
+          ...repo,
+          contributions: angularRepo.contributions
+        })
+      }
+    })
+
+    return angularRepos
   }
 )

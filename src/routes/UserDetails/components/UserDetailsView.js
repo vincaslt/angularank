@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 const UserDetailsView = ({ user, angularRepos }) => {
   const angularReposList = angularRepos.map(repo => (
     <div key={repo.id}>
-      {repo.full_name}
+      {repo.full_name} - {repo.contributions}
     </div>
   ))
 
