@@ -56,25 +56,22 @@ export const fetchPeople = () => dispatch => {
 const ACTION_HANDLERS = {
   [RECEIVE_REPOSITORIES]: (state, { repositories }) => ({
     ...state,
-    repositories: flatten(repositories)
+    repositories: repositories
   }),
   [RECEIVE_PEOPLE]: (state, { people }) => ({
     ...state,
-    people: flatten(people)
+    people: people
   })
 }
 
+const initialState = {
+  people: [],
+  repositories: []
+}
+
 // Reducers
-export function githubReducer (state = {}, action) {
+export function githubReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
-}
-
-// private utils
-function flatten (array) {
-  return array.reduce((obj, val) => ({
-    [val.id]: val,
-    ...obj
-  }), {})
 }
