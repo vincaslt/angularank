@@ -43,7 +43,13 @@ export const fetchRepositories = () => dispatch => {
 export const fetchPeople = () => dispatch => {
   dispatch(genericRequest(REQUEST_PEOPLE))
   return axios.get(AR_API_URL + '/contributors')
-    .then((people) => dispatch(receivePeople(people.data)))
+    .then(({ data }) => data.map(user => ({
+      ...user,
+      totalContributions: user.contributions.reduce((total, repo) => (
+        total + repo.contributions
+      ), 0)
+    })))
+    .then(people => dispatch(receivePeople(people)))
 }
 
 // Action handlers
