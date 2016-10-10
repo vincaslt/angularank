@@ -1,18 +1,17 @@
 import React, { PropTypes } from 'react'
 
-const Statistic = ({ tooltip, text, icon }) => (
+import './styles.scss'
+
+const Statistic = ({ tooltip, children, icon }) => (
   <div data-tip={tooltip} className='statistic-container'>
     <span className={`octicon octicon-${icon} statistics-icon`} />
-    <span className='statistic-text'>{text}</span>
+    <span className='statistic-text'>{children}</span>
   </div>
 )
 
 Statistic.propTypes = {
   tooltip: PropTypes.string.isRequired,
-  text: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
+  children: PropTypes.node.isRequired,
   icon: PropTypes.string.isRequired
 }
 

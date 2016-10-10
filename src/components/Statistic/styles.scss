@@ -1,0 +1,19 @@
+.statistic-container {
+  padding-right: 30px;
+  display: flex;
+  align-items: flex-end;
+
+  .statistic-text {
+    line-height: 24px;
+  }
+
+  .statistics-icon {
+    &.octicon-organization {
+      padding-right: 4px;
+    }
+
+    &.octicon {
+      font-size: 24px;
+    }
+  }
+}

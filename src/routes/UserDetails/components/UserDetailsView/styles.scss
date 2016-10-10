@@ -1,72 +1,67 @@
 @import "base";
 
-.user-details-container {
-  @include box-container-default()
-  flex-direction: row;
+.user-details-view {
+  .user-details-container {
+    @include box-container-default()
+    flex-direction: row;
 
-  .user-photo {
-    height: 120px;
-    width: 120px;
-    border-radius: 3px;
-    margin-right: 15px;
-  }
+    .user-photo {
+      height: 120px;
+      width: 120px;
+      border-radius: 3px;
+      margin-right: 15px;
+    }
 
-  .user-main-info {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+    .user-main-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
 
-    .user-name {
-      color: $fontColorActive;
-      font-size: 36px;
-      line-height: 40px;
-      font-weight: 600;
+      .user-login {
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 300;
+      }
 
-      &:hover {
-        text-decoration: none;
-        color: $fontColorMain;
+      .user-bio {
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 300;
+        color: $fontColorLighter;
+        font-style: italic;
+        margin-top: 10px;
       }
     }
-
-    .user-login {
-      font-size: 18px;
-      line-height: 22px;
-      font-weight: 300;
-    }
-
-    .user-bio {
-      font-size: 14px;
-      line-height: 16px;
-      font-weight: 300;
-      color: $fontColorLighter;
-      font-style: italic;
-      margin-top: 10px;
-    }
   }
-}
 
-.user-content, .user-info-entry {
-  display: flex;
-  flex-direction: row;
-}
+  .user-content, .user-info-entry {
+    display: flex;
+    flex-direction: row;
+  }
 
-.user-angular-repositories-container {
-  @include box-container-default()
-  flex: 9;
-}
+  .user-info-entry {
+    align-items: center;
+  }
 
-.angular-repos-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.side-info {
-  display: flex;
-  flex: 4;
-  flex-direction: column;
-
-  .user-info-container {
+  .user-angular-repositories-container {
     @include box-container-default()
-    margin-left: 5px;
+    flex: 9;
+  }
+
+  .angular-repos-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .side-info {
+    display: flex;
+    flex: 4;
+    flex-direction: column;
+
+    .user-info-container {
+      @include box-container-default()
+      margin-left: 5px;
+      flex: initial;
+    }
   }
 }

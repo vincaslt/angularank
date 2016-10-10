@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import ReactTooltip from 'react-tooltip'
-import Statistic from './Statistic'
+import Statistic from '../Statistic'
 
 import './styles.scss'
 
@@ -31,10 +31,10 @@ const Contributor = ({ user }) => {
         </div>
         {bioItem}
         <div className='contributor-statistics'>
-          <Statistic tooltip='Contributions' text={user.totalContributions} icon='repo-push' />
-          <Statistic tooltip='Followers' text={user.followers} icon='organization' />
-          <Statistic tooltip='Public gists' text={user.public_gists} icon='gist' />
-          <Statistic tooltip='Public repos' text={user.public_repos} icon='repo' />
+          <Statistic tooltip='Contributions' icon='repo-push'>{user.totalContributions}</Statistic>
+          <Statistic tooltip='Followers' icon='organization'>{user.followers}</Statistic>
+          <Statistic tooltip='Public gists' icon='gist'>{user.public_gists}</Statistic>
+          <Statistic tooltip='Public repos' icon='repo'>{user.public_repos}</Statistic>
         </div>
       </div>
       <ReactTooltip place='bottom' effect='solid' />

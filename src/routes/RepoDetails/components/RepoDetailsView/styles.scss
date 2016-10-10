@@ -1,9 +1,31 @@
 @import "base";
 
-.contributors-list-container {
-  @include box-container-default()
-}
+.repository-details-view {
+  .repo-ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+  }
 
-.repository-details-container {
-  @include box-container-default()
+  .contributors-list-container {
+    @include box-container-default()
+  }
+
+  .repository-details-container {
+    @include box-container-default()
+    margin-top: 15px;
+    flex-direction: row;
+    min-height: 40px;
+    position: relative;
+
+    .statistic-container {
+      color: $fontColorActive;
+      @include box-container(3px, 5px, .07);
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+    }
+  }
 }

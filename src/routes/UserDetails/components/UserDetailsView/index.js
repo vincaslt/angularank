@@ -25,13 +25,13 @@ const UserDetailsView = ({ user, angularRepos = [] }) => {
   ) : null
 
   return (
-    <div>
+    <div className='user-details-view'>
       <div className='user-details-container'>
         <img className='user-photo' src={user.avatar_url} />
         <div className='user-main-info'>
           <a
             href={`https://github.com/${user.login}`}
-            className='user-name'
+            className='title-text'
           >
             {user.name || user.login}
           </a>
