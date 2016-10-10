@@ -12,10 +12,15 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow-y: hidden;
 }
 
 *,
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+body {
+  background: $mainBgColor url("assets/noise.png") repeat left top;
 }
