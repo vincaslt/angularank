@@ -62,8 +62,14 @@
       font-size: 24px;
       align-items: flex-end;
 
-      & > * {
+      .statistic-container {
         padding-right: 30px;
+        display: flex;
+        align-items: flex-end;
+
+        .statistic-text {
+          line-height: 24px;
+        }
       }
 
       .statistics-icon {
