@@ -9,7 +9,10 @@ const Statistic = ({ tooltip, text, icon }) => (
 
 Statistic.propTypes = {
   tooltip: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
   icon: PropTypes.string.isRequired
 }
 
