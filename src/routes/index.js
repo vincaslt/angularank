@@ -8,7 +8,7 @@ export const createRoutes = (store) => ({
   component   : CoreLayout,
   indexRoute  : Contributors,
   childRoutes : [
-    UserDetailsRoute,
+    UserDetailsRoute(store),
     RepoDetailsRoute
   ]
 })

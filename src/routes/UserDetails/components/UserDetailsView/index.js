@@ -24,6 +24,22 @@ const UserDetailsView = ({ user, angularRepos = [] }) => {
     <div className='user-login'>{user.login}</div>
   ) : null
 
+  let userReposList = <div>No personal repos</div>
+
+  if (user.userRepos) {
+    userReposList = user.userRepos.slice(1, 10).map(repo => (
+      <a href={repo.html_url} key={repo.id}>{repo.full_name}</a>
+    ))
+
+    if (user.userRepos.length > 10) {
+      userReposList.push(
+        <a key={'...'} href={`https://github.com/${user.login}?tab=repositories`}>
+          <i>...full list is on github</i>
+        </a>
+      )
+    }
+  }
+
   return (
     <div className='user-details-view'>
       <div className='user-details-container'>
@@ -61,16 +77,16 @@ const UserDetailsView = ({ user, angularRepos = [] }) => {
               <a href={`https://github.com/${user.login}?tab=repositories`}>{user.public_repos}</a>
             </UserInfoEntry>
             <UserInfoEntry prop={user.totalContributions} icon='repo-push' tooltip='Contributions'>
-              {user.totalContributions}
+              <span>{user.totalContributions}</span>
             </UserInfoEntry>
             <UserInfoEntry prop={user.public_gists} icon='gist' tooltip='Gists'>
-              {user.public_gists}
+              <span>{user.public_gists}</span>
             </UserInfoEntry>
             <UserInfoEntry prop={user.company} icon='briefcase' tooltip='Company'>
-              {user.company}
+              <span>{user.company}</span>
             </UserInfoEntry>
             <UserInfoEntry prop={user.location} icon='location' tooltip='Location'>
-              {user.location}
+              <span>{user.location}</span>
             </UserInfoEntry>
             <UserInfoEntry prop={user.created_at} icon='calendar' tooltip='Joined'>
               {moment(user.created_at).format('YYYY-MM-DD')}
@@ -79,7 +95,8 @@ const UserDetailsView = ({ user, angularRepos = [] }) => {
           </div>
 
           <div className='user-info-container'>
-            TODO: user repos
+            <div className='group-title'>User Repos</div>
+            {userReposList}
           </div>
         </div>
       </div>

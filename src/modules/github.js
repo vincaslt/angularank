@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const AR_API_URL = 'http://localhost:8080'
 const API_TOKEN = 'f6e4d10c1141bbc2082b73173900ac8f27aa04e3'
-const gh = new GitHub({
+export const gh = new GitHub({
   token: API_TOKEN
 })
 
@@ -16,7 +16,7 @@ const REQUEST_PEOPLE = 'REQUEST_PEOPLE'
 const RECEIVE_PEOPLE = 'RECEIVE_PEOPLE'
 
 // Action creators
-const genericRequest = (type) => ({
+export const genericRequest = (type) => ({
   type,
   [pendingTask]: begin
 })

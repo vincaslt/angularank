@@ -1,19 +1,22 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchPeople, fetchRepositories } from '../../../modules/github'
-import { getUserDetails, getUserAngularRepositories } from '../module/selectors'
+import { getUserWithRepos, getUserAngularRepositories } from '../module/selectors'
+import { fetchUserRepositories } from '../module/userRepos'
 
 import { default as UserDetails } from '../components/UserDetailsView'
 
 const mapStateToProps = (state, props) => ({
-  user: getUserDetails(state, props),
+  user: getUserWithRepos(state, props),
   people: state.github.people,
-  angularRepos: getUserAngularRepositories(state, props)
+  angularRepos: getUserAngularRepositories(state, props),
+  usersRepos: state.usersRepos
 })
 
 const mapDispatchToProps = {
   fetchPeople,
-  fetchRepositories
+  fetchRepositories,
+  fetchUserRepositories
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -23,7 +26,9 @@ export default class UserDetailsView extends Component {
     people: PropTypes.array.isRequired,
     fetchPeople: PropTypes.func.isRequired,
     fetchRepositories: PropTypes.func.isRequired,
+    fetchUserRepositories: PropTypes.func.isRequired,
     routeParams: PropTypes.object.isRequired,
+    usersRepos: PropTypes.object.isRequired,
     user: PropTypes.object
   }
 
@@ -32,7 +37,9 @@ export default class UserDetailsView extends Component {
       people,
       fetchPeople,
       angularRepos,
-      fetchRepositories
+      fetchRepositories,
+      fetchUserRepositories,
+      usersRepos
     } = this.props
 
     if (!people || people.length === 0) {
@@ -41,6 +48,20 @@ export default class UserDetailsView extends Component {
 
     if (!angularRepos || angularRepos.length === 0) {
       fetchRepositories()
+    }
+
+    if (!usersRepos || Object.values(usersRepos).length === 0) {
+      fetchUserRepositories(this.props.routeParams.user)
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { routeParams, user } = this.props
+    if (
+      !user.userRepos &&
+      routeParams.user !== nextProps.routeParams.user
+    ) {
+      fetchUserRepositories(routeParams.user)
     }
   }
 
