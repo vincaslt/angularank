@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchPeople } from '../../../modules/github'
+import { getSortedPeople } from '../modules/selectors'
 
 import { default as Contributors } from '../components/ContributorsList'
 
-const mapStateToProps = ({ github }) => ({
-  people : github.people
+const mapStateToProps = (state) => ({
+  people: getSortedPeople(state)
 })
 
 const mapDispatchToProps = {

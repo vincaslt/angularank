@@ -5,7 +5,7 @@ import UserDetailsRoute from './UserDetails'
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
-  indexRoute  : Contributors,
+  indexRoute  : Contributors(store),
   childRoutes : [
     UserDetailsRoute
   ]
