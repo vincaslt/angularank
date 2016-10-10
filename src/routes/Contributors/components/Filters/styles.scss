@@ -1,0 +1,25 @@
+@import "base";
+
+.filter-container {
+  position: fixed;
+  top: 20vh;
+  left: 0;
+  @include box-container(10px, 0px, .6)
+  color: $fontColorInverse;
+
+  .filter-toggle {
+    cursor: pointer;
+
+    .filter-icon {
+      font-size: 28px;
+    }
+  }
+
+  .filter-content {
+    padding-top: 10px;
+
+    .filter-option {
+      color: $fontColorInverse;
+    }
+  }
+}
