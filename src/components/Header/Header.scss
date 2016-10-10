@@ -22,16 +22,18 @@ $backButtonColor: #dcdcdc;
     align-items: center;
   }
 
-  .back-button-container {
-    height: $navbarHeight;
-    width: $navbarHeight;
-    text-align: center;
-    background-color: $backButtonColor;
+  .back-button {
+    height: 100%;
     margin-right: 30px;
+    top: 0;
+    width: $navbarHeight;
+    background-color: $backButtonColor;
+    font-size: 46px;
+    outline: none;
+    display: flex;
 
-    .back-button {
-      font-size: 40px;
-      outline: none;
+    &:hover {
+      text-decoration: none;
     }
   }
 }
