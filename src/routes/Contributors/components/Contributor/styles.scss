@@ -1,0 +1,80 @@
+@import "base";
+
+.contributor {
+  flex-direction: row;
+  flex: 1;
+  min-height: 90px;
+  margin-bottom: 5px;
+  border: 1px solid rgba(0, 0, 0, .07);
+  @include box-container(5px, 3px, .05);
+
+  .user-avatar-container {
+    display: flex;
+    @include box-container(5px, 0, .07);
+
+    .user-avatar {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+  .contributor-info-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-left: 15px;
+    overflow: hidden;
+
+    .contributor-name {
+      display: flex;
+      flex-direction: row;
+
+      a{
+        line-height: 20px;
+        font-size: 24px;
+        color: $fontColorMain;
+        @include ellipsis();
+
+        &:hover {
+          color: $fontColorActive;
+          text-decoration: none;
+        }
+      }
+
+      .user-login-name {
+        padding-left: 5px;
+        font-size: 14px;
+        height: auto;
+      }
+    }
+
+    .contributor-bio {
+      color: $fontColorLighter;
+      font-size: 14px;
+      font-style: italic;
+      @include ellipsis();
+    }
+
+    .contributor-statistics {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      font-size: 24px;
+      align-items: flex-end;
+
+      & > * {
+        padding-right: 30px;
+      }
+
+      .statistics-icon {
+        &.octicon-organization {
+          padding-right: 4px;
+        }
+
+        &.octicon {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}

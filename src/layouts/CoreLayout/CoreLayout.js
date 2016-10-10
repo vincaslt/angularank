@@ -5,7 +5,7 @@ import '../../styles/core.scss'
 import { Spinner } from 'react-redux-spinner'
 
 export const CoreLayout = ({ children }) => (
-  <div>
+  <div className='viewport'>
     <Header />
     <Spinner />
     <div className='main-content'>

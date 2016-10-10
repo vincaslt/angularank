@@ -103,6 +103,7 @@
     "react-redux": "^4.4.5",
     "react-redux-spinner": "^0.4.0",
     "react-router": "^2.8.0",
+    "react-tooltip": "^3.2.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.0.0",
     "reselect": "^2.5.4",

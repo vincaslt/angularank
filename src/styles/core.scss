@@ -24,3 +24,7 @@ body {
 body {
   background: $mainBgColor url("assets/noise.png") repeat left top;
 }
+
+.span-grow {
+  flex-grow: 1;
+}

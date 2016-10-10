@@ -1,6 +1,7 @@
 @import "base";
 
 $headerBgColor: #f5f5f5;
+
 $backButtonColor: #dcdcdc;
 
 .header {
@@ -8,32 +9,47 @@ $backButtonColor: #dcdcdc;
   max-height: $navbarHeight;
   margin: 0;
   background-color: $headerBgColor;
-  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 
-  .navbar-header {
+  .header-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
     height: $navbarHeight;
-  }
 
-  .navbar-brand {
-    padding: 0 0 5px 0;
-    margin: 0;
-    font-size: 26px;
-    display: flex;
-    align-items: center;
-  }
+    .container {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      width: 100%;
+      z-index: -1;
 
-  .back-button {
-    height: 100%;
-    margin-right: 30px;
-    top: 0;
-    width: $navbarHeight;
-    background-color: $backButtonColor;
-    font-size: 46px;
-    outline: none;
-    display: flex;
+      .navbar-brand {
+        padding: 0 0 5px 0;
+        margin: 0;
+        font-size: 26px;
+        display: flex;
+        align-items: center;
 
-    &:hover {
-      text-decoration: none;
+        .angular-icon {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+
+    .back-button {
+      height: 100%;
+      top: 0;
+      width: $navbarHeight;
+      background-color: $backButtonColor;
+      font-size: 46px;
+      outline: none;
+      display: flex;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 }

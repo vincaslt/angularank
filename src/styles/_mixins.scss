@@ -1,0 +1,12 @@
+@mixin box-container($padding, $corner, $alpha) {
+  display: flex;
+  background-color: rgba(0, 0, 0, $alpha);
+  border-radius: $corner;
+  padding: $padding;
+}
+
+@mixin ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

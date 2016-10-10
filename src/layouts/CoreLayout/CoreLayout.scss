@@ -2,9 +2,13 @@
 
 $mainContentPadding: 20px;
 
+.viewport {
+  height: 100vh;
+  padding-top: $navbarHeight;
+}
+
 .main-content {
-  margin-top: $navbarHeight;
   padding-top: $mainContentPadding;
   overflow-y: auto;
-  height:100vh;
+  height: 100%;
 }
