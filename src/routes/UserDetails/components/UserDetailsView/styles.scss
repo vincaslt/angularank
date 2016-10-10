@@ -1,12 +1,8 @@
 @import "base";
 
 .user-details-container {
+  @include box-container-default()
   flex-direction: row;
-  flex: 1;
-  min-height: 90px;
-  margin-bottom: 5px;
-  border: $defaultBorder;
-  @include box-container(5px, 3px, .05);
 
   .user-photo {
     height: 120px;
@@ -55,12 +51,8 @@
 }
 
 .user-angular-repositories-container {
-  flex-direction: column;
+  @include box-container-default()
   flex: 9;
-  min-height: 90px;
-  border: $defaultBorder;
-  margin-bottom: 5px;
-  @include box-container(5px, 3px, .05);
 }
 
 .angular-repos-list {
@@ -74,11 +66,7 @@
   flex-direction: column;
 
   .user-info-container {
-    flex-direction: column;
-    min-height: 90px;
-    border: $defaultBorder;
-    @include box-container(5px, 3px, .05);
+    @include box-container-default()
     margin-left: 5px;
-    margin-bottom: 5px;
   }
 }

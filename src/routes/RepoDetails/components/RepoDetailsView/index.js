@@ -13,14 +13,14 @@ const RepoDetailsView = ({ repository, contributors }) => {
       <Filters />
       <h1>{repository.full_name})</h1>
       <div>
-        <ul>
+        <div className='repository-details-container'>
           <li>Stars: {repository.stargazers_count}</li>
           <li>Watchers: {repository.watchers_count}</li>
           <li>Forks: {repository.forks_count}</li>
           <li>Issues: {repository.open_issues}</li>
           <li>Created at: {repository.created_at}</li>
           <li>Last updated: {repository.updated_at}</li>
-        </ul>
+        </div>
         <div className='contributors-list-container'>
           <div className='group-title'>Contributors</div>
           <div>

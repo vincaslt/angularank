@@ -1,12 +1,10 @@
 @import "base";
 
 .angular-repo {
-  flex: 1;
-  flex-direction: column;
   min-width: 150px;
   margin: 5px;
-  border: $defaultBorder;
-  @include box-container(5px, 3px, .05)
+
+  @include box-container-default()
 
   .angular-repo-name {
     text-overflow: ellipsis;

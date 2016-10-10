@@ -5,6 +5,15 @@
   padding: $padding;
 }
 
+@mixin box-container-default() {
+  flex-direction: column;
+  flex: 1;
+  min-height: 90px;
+  margin-bottom: 5px;
+  border: $defaultBorder;
+  @include box-container(5px, 3px, .05);
+}
+
 @mixin ellipsis() {
   white-space: nowrap;
   overflow: hidden;
