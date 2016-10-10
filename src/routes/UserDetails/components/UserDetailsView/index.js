@@ -66,6 +66,9 @@ const UserDetailsView = ({ user, angularRepos = [] }) => {
             <UserInfoEntry prop={user.public_gists} icon='gist' tooltip='Gists'>
               {user.public_gists}
             </UserInfoEntry>
+            <UserInfoEntry prop={user.company} icon='briefcase' tooltip='Company'>
+              {user.company}
+            </UserInfoEntry>
             <UserInfoEntry prop={user.location} icon='location' tooltip='Location'>
               {user.location}
             </UserInfoEntry>

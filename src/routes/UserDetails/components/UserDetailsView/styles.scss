@@ -64,6 +64,7 @@
   flex: 9;
   min-height: 90px;
   border: $defaultBorder;
+  margin-bottom: 5px;
   @include box-container(5px, 3px, .05);
 }
 
