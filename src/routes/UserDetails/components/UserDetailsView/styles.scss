@@ -5,7 +5,7 @@
   flex: 1;
   min-height: 90px;
   margin-bottom: 5px;
-  border: 1px solid rgba(0, 0, 0, .07);
+  border: $defaultBorder;
   @include box-container(5px, 3px, .05);
 
   .user-photo {
@@ -19,13 +19,17 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    max-width: 500px;
 
     .user-name {
       color: $fontColorActive;
       font-size: 36px;
       line-height: 40px;
       font-weight: 600;
+
+      &:hover {
+        text-decoration: none;
+        color: $fontColorMain;
+      }
     }
 
     .user-login {
@@ -43,6 +47,42 @@
       margin-top: 10px;
     }
   }
+}
 
+.group-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
 
+.user-content, .user-info-entry {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-angular-repositories-container {
+  flex-direction: column;
+  flex: 9;
+  min-height: 90px;
+  border: $defaultBorder;
+  @include box-container(5px, 3px, .05);
+}
+
+.angular-repos-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.side-info {
+  display: flex;
+  flex: 4;
+  flex-direction: column;
+
+  .user-info-container {
+    flex-direction: column;
+    min-height: 90px;
+    border: $defaultBorder;
+    @include box-container(5px, 3px, .05);
+    margin-left: 5px;
+    margin-bottom: 5px;
+  }
 }

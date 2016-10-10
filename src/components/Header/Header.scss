@@ -8,7 +8,7 @@ $backButtonColor: rgba(0,0,0,.07);
   max-height: $navbarHeight;
   margin: 0;
   background-color: $headerBgColor;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  border-bottom: $defaultBorder;
 
   .header-content {
     position: relative;
@@ -47,7 +47,7 @@ $backButtonColor: rgba(0,0,0,.07);
       color: $fontColorMain;
       background-color: $backButtonColor;
 
-      &:hover {
+      &:hover, &:focus {
         text-decoration: none;
         color: $fontColorActive;
       }
