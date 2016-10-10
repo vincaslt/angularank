@@ -1,8 +1,7 @@
 @import "base";
 
 $headerBgColor: #f5f5f5;
-
-$backButtonColor: #dcdcdc;
+$backButtonColor: rgba(0,0,0,.07);
 
 .header {
   min-height: $navbarHeight;
@@ -42,13 +41,15 @@ $backButtonColor: #dcdcdc;
       height: 100%;
       top: 0;
       width: $navbarHeight;
-      background-color: $backButtonColor;
       font-size: 46px;
       outline: none;
       display: flex;
+      color: $fontColorMain;
+      background-color: $backButtonColor;
 
       &:hover {
         text-decoration: none;
+        color: $fontColorActive;
       }
     }
   }
