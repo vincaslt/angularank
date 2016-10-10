@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchPeople, fetchRepositories } from '../../../modules/github'
-import { getUserDetails, getUserAngularRepositories } from '../module/selectors'
+import { getContributors, getRepoDetails } from '../module/selectors'
 
-import { default as UserDetails } from '../components/UserDetailsView'
+import { default as RepoDetails } from '../components/RepoDetailsView'
 
 const mapStateToProps = (state, props) => ({
-  user: getUserDetails(state, props),
-  people: state.github.people,
-  angularRepos: getUserAngularRepositories(state, props)
+  people: getContributors(state, props),
+  repository: getRepoDetails(state, props)
 })
 
 const mapDispatchToProps = {
@@ -17,21 +16,20 @@ const mapDispatchToProps = {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class UserDetailsView extends Component {
+export default class RepoDetailsView extends Component {
   static propTypes = {
-    angularRepos: PropTypes.array.isRequired,
     people: PropTypes.array.isRequired,
     fetchPeople: PropTypes.func.isRequired,
     fetchRepositories: PropTypes.func.isRequired,
     routeParams: PropTypes.object.isRequired,
-    user: PropTypes.object
+    repository: PropTypes.object
   }
 
   componentWillMount () {
     const {
       people,
+      repository,
       fetchPeople,
-      angularRepos,
       fetchRepositories
     } = this.props
 
@@ -39,17 +37,19 @@ export default class UserDetailsView extends Component {
       fetchPeople()
     }
 
-    if (!angularRepos || angularRepos.length === 0) {
+    if (!repository) {
       fetchRepositories()
     }
   }
 
   render () {
-    const { user, angularRepos } = this.props
-    const userDetailsComponent = user ? <UserDetails user={user} angularRepos={angularRepos} /> : 'Loading...'
+    const { people, repository } = this.props
+    const repoDetailsComponent = repository ? (
+      <RepoDetails contributors={people} repository={repository} />
+    ) : 'Loading...'
     return (
       <div>
-        {userDetailsComponent}
+        {repoDetailsComponent}
       </div>
     )
   }

@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 
 const UserDetailsView = ({ user, angularRepos }) => {
   const angularReposList = angularRepos.map(repo => (
     <div key={repo.id}>
-      {repo.full_name} - {repo.contributions}
+      <Link to={`/repo/${repo.id}`}>{repo.full_name}</Link>
+      <span> - {repo.contributions}</span>
     </div>
   ))
 
