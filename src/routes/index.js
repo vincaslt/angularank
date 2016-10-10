@@ -6,7 +6,7 @@ import RepoDetailsRoute from './RepoDetails'
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
-  indexRoute  : Contributors(store),
+  indexRoute  : Contributors,
   childRoutes : [
     UserDetailsRoute,
     RepoDetailsRoute

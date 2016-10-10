@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 
+const getActiveFilter = (state) => state.activeFilter
 const getPeople = (state) => state.github.people
 
 export const getRepoDetails = (state, props) => (
@@ -7,8 +8,8 @@ export const getRepoDetails = (state, props) => (
 )
 
 export const getContributors = createSelector(
-  [ getPeople, getRepoDetails ],
-  (people = [], repository) => {
+  [ getPeople, getRepoDetails, getActiveFilter ],
+  (people = [], repository, filterProperty) => {
     const contributors = []
     people.forEach(user => {
       const angularRepo = user.contributions.find(repo => (
@@ -23,6 +24,6 @@ export const getContributors = createSelector(
       }
     })
 
-    return contributors
+    return contributors.sort((a, b) => b[filterProperty] - a[filterProperty])
   }
 )

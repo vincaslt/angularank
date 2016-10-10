@@ -1,6 +1,6 @@
 import React from 'react'
 import ContributorsList from '../containers/ContributorsList'
-import Filters from '../containers/Filters'
+import Filters from '../../../containers/Filters'
 
 export default () => (
   <div>

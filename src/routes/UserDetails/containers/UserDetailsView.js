@@ -46,7 +46,10 @@ export default class UserDetailsView extends Component {
 
   render () {
     const { user, angularRepos } = this.props
-    const userDetailsComponent = user ? <UserDetails user={user} angularRepos={angularRepos} /> : 'Loading...'
+    const userDetailsComponent = (user && angularRepos) ? (
+      <UserDetails user={user} angularRepos={angularRepos} />
+    ) : 'Loading...'
+
     return (
       <div>
         {userDetailsComponent}

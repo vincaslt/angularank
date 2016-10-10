@@ -1,18 +1,16 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
+import ContributorsList from '../../../../components/ContributorsList'
+import Filters from '../../../../containers/Filters'
+
+import './styles.scss'
 
 /*
   user.totalContributions -> replaced with total contributions to this specific repo
 */
 const RepoDetailsView = ({ repository, contributors }) => {
-  const contributorsListItems = contributors.map(user => (
-    <li key={user.id}>
-      <Link to={`/user/${user.login}`}>{user.name} ({user.login})</Link> - {user.totalContributions}
-    </li>
-  ))
-
   return (
     <div>
+      <Filters />
       <h1>{repository.full_name})</h1>
       <div>
         <ul>
@@ -23,12 +21,10 @@ const RepoDetailsView = ({ repository, contributors }) => {
           <li>Created at: {repository.created_at}</li>
           <li>Last updated: {repository.updated_at}</li>
         </ul>
-        <div>
-          <h2>Organization members who contributed</h2>
+        <div className='contributors-list-container'>
+          <div className='group-title'>Contributors</div>
           <div>
-            <ul>
-              {contributorsListItems}
-            </ul>
+            <ContributorsList people={contributors} />
           </div>
         </div>
       </div>
