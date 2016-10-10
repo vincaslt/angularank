@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { fetchPeople } from '../../../modules/github'
 import { getSortedPeople } from '../modules/selectors'
 
-import { default as Contributors } from '../components/ContributorsList'
+import { default as Contributors } from '../../../components/ContributorsList'
 
 const mapStateToProps = (state) => ({
   people: getSortedPeople(state)
